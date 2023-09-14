@@ -1,0 +1,87 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor</title>
+    <link rel="stylesheet" href="{%static 'style.css'%}">
+	<!-- Include Prism.js core -->
+
+</head>
+<body>
+    <header>
+        <h1>World Editor</h1>
+        <div class="language-select">
+            <label for="language">Select Language:</label>
+            <select id="language">
+                <option value="Arabic">Arabic</option>
+                <option value="English">English</option>
+                <option value="Dutch">Dutch</option>
+                <option value="French">French</option>
+                <option value="German">German</option>
+                <option value="Indonesian">Indonesian</option>
+                <option value="Italian">Italian</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Portuguese">Portuguese</option>
+                <option value="Polish">Polish</option>
+                <option value="Romanian">Romanian</option>
+                <option value="Spanish">Spanish</option>
+                <option value="Turkish">Turkish</option>
+            </select>
+        </div>
+    </header>
+    <main>
+        <div class="editor">
+            <textarea dir="{%if lang == 'Arabic'%}rtl{%else%}ltr{%endif%}" spellcheck="false" id="code" placeholder="Enter your code here...">{{code}}</textarea>
+            <button id="run-code" style="{%if lang == 'Arabic'%}left:10px;right: auto;{%endif%}" onclick = "runCode()">Run</button>
+        </div>
+        <div class="output" id="output-div" dir="{%if lang == 'Arabic'%}rtl{%else%}ltr{%endif%}">
+            <h2 class="glow">Output:</h2>
+            <pre style="font-size: 20px;font-weight: bold; color:white; display: inline-block;">>>> </pre>
+            <pre style="color:white; display: inline-block;" id="output">{%if error != None%}{{error.as_string}} {%else%} {%for i in result.elements%} <br/>  {{i}} {%endfor%} {%endif%} </pre>
+        </div>
+    </main>
+    <script>
+        function runCode() {
+            var selectedLanguage = document.getElementById('language').value;
+            var codeToRun = document.getElementById('code').value;
+            console.log(selectedLanguage)
+            var codeToRun = codeToRun.replace(/\n/g, "%0A");
+            var url = "/run/"+codeToRun+"/"+selectedLanguage
+            window.open(url, "_self")
+        }
+        var selectedLanguageFromDjango = "{{ lang }}"; // Replace with the actual variable name
+        var languageSelect = document.getElementById('language');
+        for (var i = 0; i < languageSelect.options.length; i++) {
+        if (languageSelect.options[i].value === selectedLanguageFromDjango) {
+            languageSelect.selectedIndex = i;
+            break; // Exit the loop once the correct option is found
+        }
+    }
+    function handleLanguageChange() {
+            var selectedLanguage = document.getElementById('language').value;
+
+            // Check the selected language and perform different actions based on it
+            if (selectedLanguage === 'Arabic') {
+                document.getElementById('output-div').dir = 'rtl';
+                document.getElementById('code').dir = 'rtl';
+                document.getElementById('run-code').style.left = '10px';
+                document.getElementById('run-code').style.right = 'auto';
+            } else {
+                document.getElementById('output-div').dir = 'ltr';
+                document.getElementById('code').dir = 'ltr';
+                document.getElementById('run-code').style.left = 'auto';
+                document.getElementById('run-code').style.right = '10px';
+            }
+        }
+
+        // Add the onchange event handler to the language select element
+        var languageSelect = document.getElementById('language');
+        languageSelect.addEventListener('change', handleLanguageChange);
+
+        // Initial handling for the selected language
+        handleLanguageChange();
+    </script>
+</body>
+</html>

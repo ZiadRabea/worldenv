@@ -1,0 +1,179 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+    width: 7px; /* Width of the scrollbar */
+}
+
+/* Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background-color: #000000; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners */
+}
+.glow {
+font-size: 30px;
+color: #fff;
+text-align: center;
+animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+from {
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 5px #0036e6, 0 0 7px #003de6, 0 0 10px #003de6, 0 0 12px #0023e6, 0 0 30px #0400e6;
+}
+
+to {
+    text-shadow: 0 0 4px #fff, 0 0 5px #594dff, 0 0 7px #4d8bff, 0 0 9px #4d8bff, 0 0 12px #594dff, 0 0 30px #594dff, 0 0 30px #4d6eff;
+}
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555558; /* Color when hovered */
+}
+
+/* Track background */
+::-webkit-scrollbar-track {
+    background: #fff; /* Background of the scrollbar track */
+    border: 1px solid #ccc; /* Border around the track */
+    border-radius: 10px; /* Rounded corners */
+}
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    overflow: hidden;
+}
+h2{
+    text-align: center;
+    font-size: 30px;
+
+}
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    z-index: 2; /* Add a higher z-index to ensure it's on top of other elements */
+}
+
+main {
+    display: flex;
+    /* position: absolute; Remove this line */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    transition: background-color 0.3s ease;
+    height:100vh;
+}
+/* Language selection styles */
+.language-select {
+    display: inline-block;
+    margin-left: 20px;
+    color: #fff;
+}
+
+.language-select label {
+    margin-right: 10px;
+}
+
+.language-select select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Code editor styles */
+.editor {
+    flex: 1;
+    padding-right: 0;
+    overflow: auto;
+    position: relative; /* Add relative positioning to .editor */
+    height: 100%;
+}
+
+#code {
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    resize: none;
+    font-family: Monaco, monospace;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+}
+.keyword {
+    color: orange;
+    font-weight: bold;
+}
+
+.builtin {
+    color: purple;
+    font-weight: bold;
+}
+
+.string {
+    color: green;
+}
+/* Output styles */
+.output {
+    flex: 1;
+    padding-left: 0;
+    overflow: auto;
+    position: relative; /* Add relative positioning to .output */
+    background:#1b1b1b
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+pre {
+    white-space: pre-wrap;
+    font-family: Monaco, monospace;
+    font-size: 16px;
+}
+
+/* Dark mode */
+.dark-mode {
+    background-color: #111;
+    color: #fff;
+}
+
+/* Run button styles */
+#run-code {
+    position: absolute; /* Position the button absolutely within .editor */
+    top: 10px; /* Adjust top and right values as needed */
+    right: 10px;
+    background-color: #0074d9;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#run-code:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+}
