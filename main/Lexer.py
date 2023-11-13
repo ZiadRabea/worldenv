@@ -27,7 +27,7 @@ class Lexer:
         self.pos.advance(self.current_char)
         self.current_char = self.text[self.pos.idx] if self.pos.idx < len(self.text) else None
 
-    def make_tokens(self):
+     def make_tokens(self):
         tokens = []
 
         while self.current_char != None:
@@ -42,8 +42,10 @@ class Lexer:
                 tokens.append(self.make_number())
             elif self.current_char in LETTERS:
                 tokens.append(self.make_identifier())
-            elif self.current_char in ('"', "'"):
-                tokens.append(self.make_string())
+            elif self.current_char == '"':
+                tokens.append(self.make_string(q='"'))
+            elif self.current_char == "'":
+                tokens.append(self.make_string(q="'"))
             elif self.current_char == '+':
                 tokens.append(Token(TT_PLUS, pos_start=self.pos))
                 self.advance()
@@ -118,18 +120,18 @@ class Lexer:
         else:
             return Token(TT_FLOAT, float(num_str), pos_start, self.pos)
 
-    def make_string(self):
+    def make_string(self, q):
         string = ''
         pos_start = self.pos.copy()
         escape_character = False
         self.advance()
-
+        quote_type = q
         escape_characters = {
             'n': '\n',
             't': '\t'
         }
 
-        while self.current_char != None and (self.current_char not in ('"', "'") or escape_character):
+        while self.current_char != None and (self.current_char != q or escape_character):
             if escape_character:
                 string += escape_characters.get(self.current_char, self.current_char)
             else:
