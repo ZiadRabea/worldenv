@@ -145,14 +145,16 @@ class Interpreter:
             if condition_value.is_true():
                 expr_value = res.register(self.visit(expr, context))
                 if res.should_return(): return res
-                return res.success(Number.null if should_return_null else expr_value)
-
+                try:
+                    return res.success(expr_value)
+                except:
+                    pass
         if node.else_case:
             expr, should_return_null = node.else_case
             expr_value = res.register(self.visit(expr, context))
             if res.should_return():
                 return res
-            return res.success(Number.null if should_return_null else expr_value)
+            return res.success(expr_value)
 
         return res.success(Number.null)
 
@@ -209,7 +211,6 @@ class Interpreter:
             elements.append(value)
 
         return res.success(
-            Number.null if node.should_return_null else
             List(elements).set_context(context).set_pos(node.pos_start, node.pos_end)
         )
 
@@ -236,7 +237,6 @@ class Interpreter:
             elements.append(value)
 
         return res.success(
-            Number.null if node.should_return_null else
             List(elements).set_context(context).set_pos(node.pos_start, node.pos_end)
         )
 

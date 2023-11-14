@@ -8,8 +8,8 @@ import sys
 def home(request):
     return redirect("/run/طباعة('أهلاً بالعالم')/Arabic")
 
-
 def read_code(request, code, lang):
+    print(code)
     import main.Tokens
     main.Tokens.set_lang(f"{lang}_KW")
     print(main.Tokens.data_dict)
