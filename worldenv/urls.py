@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
     path('run/<str:code>/<str:lang>', read_code),
-    path('run/<path:code>/<str:lang>/', read_code),
+    path('run/<path:code>/<str:lang>', read_code),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
