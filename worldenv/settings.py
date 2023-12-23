@@ -25,7 +25,7 @@ DEFAULT_CHARSET = 'utf-8'
 SECRET_KEY = 'django-insecure-3@wv(#z@^dta5bic4lud6lox0%*!z1rpao(9p)tp=z5hu#0%3g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [".vercel.app"]
 
