@@ -8,7 +8,7 @@ if getattr(sys, 'frozen', False):
     app_path = os.path.dirname(sys.executable)
 else:
     app_path = os.path.dirname(os.path.abspath(__file__))
-data = open(r"{}\Characters.txt".format(app_path), "r", encoding="UTF-8")
+data = open(r"{}Characters.txt".format(app_path), "r", encoding="UTF-8")
 DIGITS = '0123456789'
 LETTERS = data.read()
 data.close()
