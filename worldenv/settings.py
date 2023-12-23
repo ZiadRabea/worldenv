@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'worldenv.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD':'45GdAaA5E2DFbdgCg-ddb6g62Cc2dA3d',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT':'38627',
     }
 }
 
