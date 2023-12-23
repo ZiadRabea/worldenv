@@ -1,18 +1,14 @@
 # IMPORTS
 import sys
-from main.Tokens import *
-from main.Errors import *
+from Tokens import *
+from Errors import *
 
 # CONSTANTS
 if getattr(sys, 'frozen', False):
     app_path = os.path.dirname(sys.executable)
 else:
     app_path = os.path.dirname(os.path.abspath(__file__))
-data = open(r"{}Characters.txt".format(app_path), "r", encoding="UTF-8")
 DIGITS = '0123456789'
-LETTERS = data.read()
-data.close()
-LETTERS_DIGITS = LETTERS + DIGITS
 
 
 class Lexer:
@@ -40,8 +36,6 @@ class Lexer:
                 self.advance()
             elif self.current_char in DIGITS:
                 tokens.append(self.make_number())
-            elif self.current_char in LETTERS:
-                tokens.append(self.make_identifier())
             elif self.current_char == '"':
                 tokens.append(self.make_string(q='"'))
             elif self.current_char == "'":
@@ -95,10 +89,7 @@ class Lexer:
                 tokens.append(Token(TT_COMMA, pos_start=self.pos))
                 self.advance()
             else:
-                pos_start = self.pos.copy()
-                char = self.current_char
-                self.advance()
-                return [], IllegalCharError(pos_start, self.pos, "'" + char + "'")
+                tokens.append(self.make_identifier())
 
         tokens.append(Token(TT_EOF, pos_start=self.pos))
         return tokens, None
@@ -149,7 +140,7 @@ class Lexer:
         id_str = ''
         pos_start = self.pos.copy()
 
-        while self.current_char != None and self.current_char in LETTERS_DIGITS + '_':
+        while self.current_char and self.current_char not in " )(-+.,<>/^*\n%#@!=[]{}`~\t":
             id_str += self.current_char
             self.advance()
 
