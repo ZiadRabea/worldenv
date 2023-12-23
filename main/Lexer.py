@@ -1,7 +1,7 @@
 # IMPORTS
 import sys
-from Tokens import *
-from Errors import *
+from main.Tokens import *
+from main.Errors import *
 
 # CONSTANTS
 if getattr(sys, 'frozen', False):
