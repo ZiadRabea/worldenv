@@ -977,23 +977,9 @@ class BuiltInFunction(BaseFunction):
 
         fn = fn.value
 
-        try:
-            with open(f"{app_path}/libs/{fn}", "r", encoding="UTF-8") as f:
-                script = f.read()
-        except Exception as e:
-            try:
-                response = requests.get(f"{baseurl}{fn}")
-                response.raise_for_status()  # Raise an exception for any unsuccessful request
-                with open(f"{app_path}/libs/{fn}", "w", encoding="UTF-8") as f:
-                    f.write(response.text)
-                with open(f"{app_path}/libs/{fn}", "r", encoding="UTF-8") as f:
-                    script = f.read()
-            except requests.exceptions.RequestException as e:
-                return RTResult().failure(RTError(
-                    self.pos_start, self.pos_end,
-                    f"Failed to load script \"{fn}\"\n" + str(e),
-                    exec_ctx
-                ))
+        response = requests.get(f"{baseurl}{fn}")
+        response.raise_for_status()  # Raise an exception for any unsuccessful request
+        script = response.text        
 
         _, error = run(fn, script)
 
