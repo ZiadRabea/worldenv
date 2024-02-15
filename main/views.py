@@ -23,5 +23,6 @@ def read_code(request, code, lang):
     del sys.modules["main.Parser"]
     del sys.modules["main.RT_result"]
     del sys.modules["main.Interpreter"]
+    code = code.replace(" ;", "\n")
     #print(sys.modules)
     return render(request, "page.html", {"code": code, "error": error, "result": result, "lang":lang})

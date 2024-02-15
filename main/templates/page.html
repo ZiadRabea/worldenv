@@ -47,7 +47,8 @@
             var selectedLanguage = document.getElementById('language').value;
             var codeToRun = document.getElementById('code').value;
             console.log(selectedLanguage)
-            var codeToRun = codeToRun.replace(/\n/g, "%0A");
+            var codeToRun = codeToRun.replace(/\n/g, " ;");
+            var codeToRun = codeToRun.replace('\\', "%5C");
             var url = "/run/"+codeToRun+"/"+selectedLanguage
             window.open(url, "_self")
         }
