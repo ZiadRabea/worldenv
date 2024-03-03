@@ -761,13 +761,8 @@ class BuiltInFunction(BaseFunction):
     #####################################
 
     def execute_print(self, exec_ctx):
-        for i in exec_ctx.symbol_table.get('value').elements:
-            if isinstance(i, List) or isinstance(exec_ctx.symbol_table.get('value'), Dict):
-                return RTResult().success(List(i.elements))
-            else:
-                return RTResult().success(String(i.value))
-        return RTResult().success(String.none)
-
+        RTResult().success(exec_ctx.symbol_table.get('value'))
+ 
     execute_print.arg_names = ['value']
     execute_print.infinite = True
     execute_print.accept_none = True
