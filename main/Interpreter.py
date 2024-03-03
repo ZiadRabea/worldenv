@@ -471,13 +471,7 @@ class Number(Value):
 
     def __repr__(self):
         return str(self.value)
-
-
-Number.null = Number(0)
-Number.false = Number(0)
-Number.true = Number(1)
-Number.math_PI = Number(3.141592653589793)
-
+    
 
 class String(Value):
     def __init__(self, value):
@@ -530,6 +524,11 @@ class String(Value):
     def __repr__(self):
         return f'"{self.value}"'
 
+Number.null = Number(0)
+String.none = String("")
+Number.false = Number(0)
+Number.true = Number(1)
+Number.math_PI = Number(3.141592653589793)
 
 class List(Value):
     def __init__(self, elements):
