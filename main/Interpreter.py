@@ -763,9 +763,9 @@ class BuiltInFunction(BaseFunction):
     def execute_print(self, exec_ctx):
         for i in exec_ctx.symbol_table.get('value').elements:
             if isinstance(i, List) or isinstance(exec_ctx.symbol_table.get('value'), Dict):
-                print(i.elements)
+                return i.elements
             else:
-                print(str(i.value))
+                return i.value
         return RTResult().success(String.none)
 
     execute_print.arg_names = ['value']
@@ -1021,7 +1021,7 @@ class BuiltInFunction(BaseFunction):
                 exec_ctx
             ))
 
-        return RTResult().success(Number.null)
+        return RTResult().success(String.none)
 
     execute_import.arg_names = ["fn"]
     execute_import.infinite = False
