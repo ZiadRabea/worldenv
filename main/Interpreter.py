@@ -761,7 +761,7 @@ class BuiltInFunction(BaseFunction):
     #####################################
 
     def execute_print(self, exec_ctx):
-        RTResult().success(exec_ctx.symbol_table.get('value'))
+        return RTResult().success(List(list(exec_ctx.symbol_table.get('value'))))
  
     execute_print.arg_names = ['value']
     execute_print.infinite = True
