@@ -1222,7 +1222,7 @@ class BuiltInFunction(BaseFunction):
     execute_int.infinite = False
     execute_int.accept_none = False
     
-  def execute_int(self, exec_ctx):
+    def execute_int(self, exec_ctx):
         result = int(exec_ctx.symbol_table.get('number').value)
         return RTResult().success(Number(result))
 
@@ -1281,7 +1281,7 @@ class BuiltInFunction(BaseFunction):
     execute_send.infinite = False
     execute_send.accept_none = False
 
-        def execute_exec(self, exec_ctx):
+    def execute_exec(self, exec_ctx):
         code = exec_ctx.symbol_table.get('code')
         if not isinstance(code, String):
             return RTResult().failure(RTError(
